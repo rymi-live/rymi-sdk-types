@@ -1,0 +1,71 @@
+name: Publish to npm
+
+on:
+  push:
+    tags: ['@rymi/sdk-types@*', 'sdk-types-v*']
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Verify prebuilt artifact exists
+        run: test -f dist/index.d.ts && test -f dist/index.js && test -f dist/index.mjs
+
+      - name: Leak guard
+        run: |
+          node <<'NODE'
+          const { readFileSync } = require('node:fs');
+
+          const denylist = [
+            'MIN_GROSS_MARGIN',
+            'REALTIME_MODEL_COST_PER_MIN',
+            'STANDARD_MODEL_COST_PER_MIN',
+            'BYOK_FLAT_RATE_PER_MIN',
+            'ROLE_RATES_PER_MIN',
+            'MODEL_TIER_CEILING',
+            'stackFitsRole',
+            'cheapestRoleForStack',
+            'PUBLISHABLE_KEY_ALLOWED_SCOPES',
+            'SECRET_KEY_ONLY_SCOPES',
+            'SERVER_FLAG_REQUIRED_SCOPES',
+            'validatePublishConfig',
+            'ROLE_STACK_POLICY',
+            'AGENT_CONFIG_SCHEMA',
+            'CHANGE_SET_VALIDATORS',
+            'DEPENDENCY_GRAPH',
+            'QUEUE_RETRY_DEFAULTS',
+            'deriveUsageIdempotencyKey'
+          ];
+
+          const blob = [
+            'dist/index.js',
+            'dist/index.mjs',
+            'dist/index.d.ts'
+          ]
+            .map((file) => readFileSync(file, 'utf8'))
+            .join('\n');
+
+          const hits = denylist.filter((sym) => blob.includes(sym));
+          if (hits.length > 0) {
+            console.error(`Sensitive symbols leaked: ${hits.join(', ')}`);
+            process.exit(1);
+          }
+
+          console.log('leak guard passed');
+          NODE
+
+      - name: Publish to npm
+        run: npm publish --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
