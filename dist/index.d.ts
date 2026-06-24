@@ -43,6 +43,8 @@ export declare interface AgentAdvancedConfig {
     stopSpeakingThreshold?: number;
     resumeAfterInterruption?: boolean;
     smartEndpointing?: boolean;
+    /** End-of-turn detection engine. 'smart-turn-v3' uses the audio endpointer; 'timer' relies on silence only. */
+    turnEndpointer?: 'smart-turn-v3' | 'timer';
     waitAfterSentence?: number;
     waitAfterNoPunctuation?: number;
     waitAfterNumbers?: number;
@@ -52,6 +54,22 @@ export declare interface AgentAdvancedConfig {
     stt_keywords?: string;
     /** Server-side noise suppression on inbound audio (Deepgram). */
     stt_background_denoising?: boolean;
+    /** Deepgram Flux: confidence (0.5–0.9) required before committing end-of-turn. */
+    stt_eot_confidence?: number;
+    /** Deepgram Flux: max ms of silence before forcing end-of-turn. */
+    stt_eot_timeout_ms?: number;
+    /** AssemblyAI: minimum silence before detecting end-of-turn when confident. */
+    stt_min_turn_silence_ms?: number;
+    /** AssemblyAI: maximum silence before forcing end-of-turn. */
+    stt_max_turn_silence_ms?: number;
+    /** Soniox: strongly prefer the agent's language instead of 60+ auto-detect. */
+    stt_strict_language?: boolean;
+    /** Soniox: max ms delay before confirming a final utterance. */
+    stt_endpoint_delay_ms?: number;
+    /** Soniox: comma-separated custom vocabulary terms. */
+    stt_custom_vocabulary?: string;
+    /** Soniox: domain/context hints ("key: value" per line) to guide transcription. */
+    stt_context?: string;
     /** LLM sampling temperature (0–2). 0.5 is balanced. */
     temperature?: number;
     /** Hard cap on LLM response tokens per turn. */
@@ -136,6 +154,7 @@ export declare interface AgentConfig {
     stopSpeakingThreshold: number;
     resumeAfterInterruption: boolean;
     smartEndpointing: boolean;
+    turnEndpointer?: 'smart-turn-v3' | 'timer';
     waitAfterSentence: number;
     waitAfterNoPunctuation: number;
     waitAfterNumbers: number;
@@ -144,6 +163,14 @@ export declare interface AgentConfig {
     stt_profanity_filter: boolean;
     stt_keywords: string;
     stt_background_denoising: boolean;
+    stt_eot_confidence?: number;
+    stt_eot_timeout_ms?: number;
+    stt_min_turn_silence_ms?: number;
+    stt_max_turn_silence_ms?: number;
+    stt_strict_language?: boolean;
+    stt_endpoint_delay_ms?: number;
+    stt_custom_vocabulary?: string;
+    stt_context?: string;
     /** LLM sampling temperature (0–2). Defaults to 0.5. */
     temperature: number;
     /** Hard cap on LLM response tokens per turn. Defaults to 250. */
@@ -177,6 +204,8 @@ export declare interface AgentConfig {
     variables?: AgentVariable[];
     promptMode?: 'builder' | 'raw';
     rawSystemPrompt?: string | null;
+    agent_kind?: 'managed' | 'custom' | null;
+    managed_sku_id?: string | null;
 }
 
 /** Feature flags for recording, transcription, and consent. */
