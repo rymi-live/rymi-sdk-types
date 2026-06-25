@@ -32,8 +32,7 @@ export type {
     CallParticipantStatus,
     CallRecording,
     TelephonyLeg,
-    TranscriptionResult,
-    AgentRole
+    TranscriptionResult
 } from '@rymi/shared-types';
 
 // --- Billing (invoices) ---

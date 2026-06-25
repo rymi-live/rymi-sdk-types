@@ -9,7 +9,6 @@ declare type AgentToolBinding_2 = AgentToolBinding;
 export declare interface Agent {
     id: string;
     name: string;
-    agent_role: AgentRole;
     language?: string | null;
     voice?: string;
     persona?: AgentPersona_2;
@@ -119,7 +118,6 @@ export declare interface AgentConfig {
     /** Wire shape used by the custom voice endpoint when tts_provider is 'custom-voice'. */
     custom_voice_mode?: 'rymi' | 'openai-compat';
     custom_transcriber_url?: string | null;
-    agent_role: 'operator' | 'specialist' | 'executive' | 'concierge';
     language: string | null;
     supported_languages: string[];
     voice: string;
@@ -237,7 +235,6 @@ export declare interface AgentPayload {
     voice?: string;
     language?: string | null;
     supported_languages?: string[];
-    agent_role?: 'operator' | 'specialist' | 'executive' | 'concierge';
     llm_provider?: AgentLlmProvider;
     llm_model?: string;
     llm_fallback_provider?: string | null;
@@ -318,8 +315,6 @@ export declare interface AgentRequiredSlot {
     required?: boolean;
 }
 
-export declare type AgentRole = 'operator' | 'specialist' | 'executive' | 'concierge';
-
 export declare interface AgentScript {
     title?: string;
     when?: string;
@@ -361,7 +356,6 @@ declare interface AgentTemplateDefaults {
     offLimits: string;
     prohibitedClaims: string;
     language?: string;
-    agentRole?: 'operator' | 'specialist' | 'executive' | 'concierge';
     bargeInEnabled?: boolean;
     maxCallDuration?: number;
     knowledgeBaseHints?: string[];

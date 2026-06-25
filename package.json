@@ -1,52 +1,52 @@
 {
-    "name": "@rymi/sdk-types",
-    "version": "1.0.1",
-    "description": "Public TypeScript types for the Rymi SDKs and REST API.",
-    "license": "MIT",
-    "author": "Rymi AI <engineering@rymi.live>",
-    "homepage": "https://rymi.live",
-    "keywords": [
-        "rymi",
-        "voice-ai",
-        "types",
-        "sdk"
-    ],
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/rymi-live/rymi-sdk-types.git"
-    },
-    "bugs": {
-        "url": "https://github.com/rymi-live/rymi-sdk-types/issues"
-    },
-    "main": "./dist/index.js",
-    "module": "./dist/index.mjs",
-    "types": "./dist/index.d.ts",
-    "exports": {
-        ".": {
-            "types": "./dist/index.d.ts",
-            "import": "./dist/index.mjs",
-            "require": "./dist/index.js"
-        }
-    },
-    "files": [
-        "dist",
-        "README.md",
-        "LICENSE"
-    ],
-    "publishConfig": {
-        "access": "public",
-        "provenance": true
-    },
-    "scripts": {
-        "build": "tsup && tsc -p tsconfig.dts.json && api-extractor run --local && node scripts/fix-dts-rollup.mjs && rm -rf temp",
-        "lint": "tsc --noEmit",
-        "test": "vitest run"
-    },
-    "devDependencies": {
-        "@microsoft/api-extractor": "^7.43.0",
-        "@rymi/shared-types": "workspace:*",
-        "tsup": "^8.0.0",
-        "typescript": "^5.0.0",
-        "vitest": "^4.0.18"
+  "name": "@rymi/sdk-types",
+  "version": "2.0.0",
+  "description": "Public TypeScript types for the Rymi SDKs and REST API.",
+  "license": "MIT",
+  "author": "Rymi AI <engineering@rymi.live>",
+  "homepage": "https://rymi.live",
+  "keywords": [
+    "rymi",
+    "voice-ai",
+    "types",
+    "sdk"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rymi-live/rymi-sdk-types.git"
+  },
+  "bugs": {
+    "url": "https://github.com/rymi-live/rymi-sdk-types/issues"
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
     }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "scripts": {
+    "build": "tsup && tsc -p tsconfig.dts.json && api-extractor run --local && node scripts/fix-dts-rollup.mjs && rm -rf temp",
+    "lint": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@microsoft/api-extractor": "^7.43.0",
+    "@rymi/shared-types": "workspace:*",
+    "tsup": "^8.0.0",
+    "typescript": "^5.0.0",
+    "vitest": "^4.0.18"
+  }
 }
