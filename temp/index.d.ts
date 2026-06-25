@@ -1,0 +1,10 @@
+export type { Agent, AgentConfig, AgentPayload, AgentVoiceConfig, AgentPersona, AgentCallerPersona, AgentVariable, AgentRequiredSlot, AgentPlaybook, AgentScript, AgentFeatures, AgentAdvancedConfig, AgentLlmProvider } from '@rymi/shared-types';
+export type { Call, CallParticipant, CallStatus, CallParticipantRole, CallParticipantTransport, CallParticipantStatus, CallRecording, TelephonyLeg, TranscriptionResult } from '@rymi/shared-types';
+export type { Invoice, InvoiceItem, InvoiceListResponse, InvoiceDetailResponse, InvoiceStatus, InvoiceKind, InvoiceItemKind, InvoiceGateway } from '@rymi/shared-types';
+export type { KnowledgeSource, KnowledgeChunk, KnowledgeSourceKind, KnowledgeSourceStatus, CreateKnowledgeSourceRequest, CreateKnowledgeSourceTextRequest, CreateKnowledgeSourceUrlRequest } from '@rymi/shared-types';
+export type { TelephonyEvent, TelephonyEventType, CallStatusChangedEvent, RecordingCompletedEvent, TransferCompletedEvent, MachineDetectedEvent } from '@rymi/shared-types';
+export type { AgentTemplate, AgentTemplateStatus, AgentTemplateVisibility, SetupQuestion } from '@rymi/shared-types';
+export type { ToolCapabilitySafeView, ConnectorConnectionSafeView, BuiltinAgentToolId, AgentToolBinding, ToolSideEffect } from '@rymi/shared-types';
+export type { CallEvaluationResult, TranscriptSegment, CallSentiment, CallIntelligenceStatus, PostCallStructuredExtractionConfig } from '@rymi/shared-types';
+export type { CallTranscriptEvent } from '@rymi/shared-types';
+export type { SessionEndReasonCode } from '@rymi/shared-types';
