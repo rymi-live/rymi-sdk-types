@@ -98,6 +98,20 @@ export type {
 export type { CallTranscriptEvent } from '@rymi/shared-types';
 export type { SessionEndReasonCode } from '@rymi/shared-types';
 
+// --- Campaigns + contacts ---
+export type {
+    Campaign,
+    CampaignStatus,
+    CampaignType,
+    Contact,
+    CampaignMember,
+    CampaignAttempt,
+    CampaignReport,
+    CampaignGoal,
+    FollowupKind,
+    CampaignCompliancePolicy
+} from '@rymi/shared-types';
+
 // NOTE: This package is intentionally TYPE-ONLY. Runtime helpers are not
 // re-exported from @rymi/shared-types because doing so pulls its
 // side-effectful internal module graph (and business logic) into the public
